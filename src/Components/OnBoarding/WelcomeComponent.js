@@ -1,139 +1,139 @@
-import React from 'react';
-import Welcome from '../../assets/images/welcome.png';
-import StepOne from './StepOne';
-import StepTwo from './StepTwo';
-import StepThree from './StepThree';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { Card, CardActions, CardContent, Container, MobileStepper } from '@material-ui/core';
-import {KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
-const WelcomeComponent=() =>{
+import React, { useState } from "react";
+import Welcome from "../../assets/images/welcome.png";
+import StepOne from "./StepOne";
+import StepTwo from "./StepTwo";
+import StepThree from "./StepThree";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import { Container } from "@material-ui/core";
+
+const WelcomeComponent = () => {
   const classes = useStyles();
-  const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    
-  };
-  function switchStep() {
-    
-    switch (activeStep) {
-      case 0:
-    return (
-      <>
-        <StepOne className={classes.Steps}/>
-      </>
-    );
-    case 1:
-      return (
-        <>
-          <StepTwo/>
-        </>
-      );
-      case 2:
-        return (
-          <>
-            <StepThree className={classes.Steps}/>
-          </>
-        );  
-  }
-  }
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const steps = [" ", " ", " "];
+  const [activeStep, setActiveStep] = useState("1");
+
+  const handleStepper = (e) => {
+    setActiveStep(e.target.name);
   };
 
   return (
-    <Container component="main" maxWidth="xs" >
-    <div style={{display:"flex",
-    justifyContent:"center",}} className={classes.root} >
-      <Card className={classes.MyCard}>
-      <CardContent>
-      <div className={classes.Avatar}>
-        <img src={Welcome} alt="default-logo"/>
-       
+    <Container maxWidth="xs">
+      <div className={classes.ImgWrapper}>
+        <img src={Welcome} alt="welcome-logo" />
       </div>
-      <div >
-        { switchStep()}
-        <MobileStepper
-      variant="dots"
-      steps={3}
-      position="static"
-      activeStep={activeStep}
-      className={classes.Stepper}
-      nextButton={
-        <> 
-        <Button size="small" onClick={handleNext} disabled={activeStep === 2}>
-          Next
-          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-        </Button>
-        </>
-      }
-      backButton={
-        <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-          {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-          Back
-        </Button>
-      }
-    />
+      <div>
+        {activeStep === "1" ? (
+          <StepOne />
+        ) : activeStep === "2" ? (
+          <StepTwo />
+        ) : activeStep === "3" ? (
+          <StepThree />
+        ) : (
+          ""
+        )}
       </div>
-      </CardContent>
-      <CardActions>
-
-      <div className={classes.MyButton}>
-        <div>
-
-      <Button fullWidth variant="contained" color="primary">
-  Login
-</Button>
+      <div className={classes.StepperBtnWrapper}>
+        {steps.map((step, index) => (
+          <button
+            name={index + 1}
+            key={`step${index + 1}`}
+            onClick={handleStepper}
+            className={classes.StepperBtn}
+          >
+            {step}
+          </button>
+        ))}
+      </div>
+      <div>
+        <div className={classes.SignupBtnWrapper}>
+          <Button variant="contained" className={classes.SignupBtn}>
+            Sign up
+          </Button>
         </div>
-        <div>
-
-<Button fullWidth className={classes.Signup} >
-  Signup
-</Button>
+        <div className={classes.SignupBtnWrapper}>
+          <Button className={classes.SkipBtn} variant="text">
+            Skip
+          </Button>
         </div>
       </div>
-      </CardActions>
-      </Card>
-    </div>
     </Container>
-  )
-}
+  );
+};
+
 export default WelcomeComponent;
 
-
-
-
-
-
 const useStyles = makeStyles((theme) => ({
-  root: 
-  {
-     
-    marginTop: theme.spacing(10),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  
+  ImgWrapper: {
+    display: "flex",
+    justifyContent: "center",
+    objectFit: "contain",
+    marginTop: "40%",
   },
-  MyCard:{
-    
+
+  StepperBtnWrapper: {
+    display: "flex",
+    justifyContent: "center",
   },
-  Avatar:{
-    margin: theme.spacing(5), 
+
+  StepperBtn: {
+    backgroundColor: "#d0cfd4",
+    height: "10px",
+    borderRadius: "50%",
+    border: "none",
+    marginRight: "10px",
+    marginTop: "70px",
+    marginBottom: "70px",
+    cursor: "pointer",
   },
-  MyButton:{
-    width:'100%',
-    margin: theme.spacing(1),
+
+  SignupBtnWrapper: {
+    display: "flex",
+    justifyContent: "center",
   },
-  Signup:{
-    marginTop: theme.spacing(2),
+
+  SignupBtn: {
+    backgroundColor: "#7966fe",
+    color: "#fff",
+    fontWeight: 500,
+    textTransform: "none",
+    borderRadius: "22px",
+    boxShadow: "none",
+    padding: "10px 0px",
+    width: "90%",
+    "&:hover": {
+      backgroundColor: "#7966fe",
+      borderColor: "#7966fe",
+      boxShadow: "none",
+    },
+    "&:active": {
+      boxShadow: "none",
+      backgroundColor: "#7966fe",
+      borderColor: "#7966fe",
+    },
+    "&:focus": {
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+    },
   },
-  Stepper:{
-    backgroundColor: "",
-  },
-  Steps:{
-    display: 'flex',
-    justifyContent: 'center',
+
+  SkipBtn: {
+    color: "#7966fe",
+    textTransform: "none",
+    fontWeight: 500,
+    boxShadow: "none",
+    width: "90%",
+    marginTop: "20px",
+    "&:hover": {
+      backgroundColor: "#fff",
+      borderColor: "#fff",
+      boxShadow: "none",
+    },
+    "&:active": {
+      boxShadow: "none",
+      backgroundColor: "#fff",
+      borderColor: "#fff",
+    },
+    "&:focus": {
+      boxShadow: "none",
+    },
   },
 }));

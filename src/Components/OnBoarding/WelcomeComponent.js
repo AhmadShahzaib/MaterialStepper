@@ -9,7 +9,7 @@ import { Container } from "@material-ui/core";
 
 const WelcomeComponent = () => {
   const classes = useStyles();
-  const steps = [" ", " ", " "];
+
   const [activeStep, setActiveStep] = useState("1");
 
   const handleStepper = (e) => {
@@ -33,16 +33,45 @@ const WelcomeComponent = () => {
         )}
       </div>
       <div className={classes.StepperBtnWrapper}>
-        {steps.map((step, index) => (
-          <button
-            name={index + 1}
-            key={`step${index + 1}`}
-            onClick={handleStepper}
-            className={classes.StepperBtn}
-          >
-            {step}
-          </button>
-        ))}
+        <button
+          name={1}
+          onClick={handleStepper}
+          className={`${classes.StepperBtn} ${
+            activeStep === "1"
+              ? ` ${classes.Active}`
+              : activeStep === "2"
+              ? ""
+              : activeStep === "3"
+              ? ""
+              : ""
+          }`}
+        ></button>
+        <button
+          name={2}
+          onClick={handleStepper}
+          className={`${classes.StepperBtn} ${
+            activeStep === "1"
+              ? ""
+              : activeStep === "2"
+              ? `${classes.Active}`
+              : activeStep === "3"
+              ? ""
+              : ""
+          }`}
+        ></button>
+        <button
+          name={3}
+          onClick={handleStepper}
+          className={`${classes.StepperBtn} ${
+            activeStep === "1"
+              ? ""
+              : activeStep === "2"
+              ? ""
+              : activeStep === "3"
+              ? `${classes.Active}`
+              : ""
+          }`}
+        ></button>
       </div>
       <div>
         <div className={classes.SignupBtnWrapper}>
@@ -85,7 +114,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "70px",
     cursor: "pointer",
   },
-
+  Active: {
+    backgroundColor: "#7966ff",
+  },
   SignupBtnWrapper: {
     display: "flex",
     justifyContent: "center",

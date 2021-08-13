@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import ProductBar from "../components/ProductPage/ProductBar";
+import ProductBar from "../Components/ProductPage/ProductBar";
 
 const ProductPage = () => {
   const classes = useStyles();

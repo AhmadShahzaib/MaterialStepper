@@ -15,7 +15,7 @@ function Selector() {
   };
   return (
     <>
-      {/* <FormControl variant="filled" className={classes.formControl}>
+      <FormControl variant="filled" className={classes.formControl}>
         <InputLabel id="Stock-label">Stock Search</InputLabel>
         <Select
           labelId="Stock-label"
@@ -31,8 +31,8 @@ function Selector() {
           <MenuItem value="TMS">TMS</MenuItem>
           <MenuItem value="PGR">PGR</MenuItem>
         </Select>
-      </FormControl> */}
-      <FormControl variant="outlined" className={classes.formControl}>
+      </FormControl>
+      {/* <FormControl variant="outlined" className={classes.formControl}>
         <select
           className={classes.SelectButton}
           value="Stock Search"
@@ -47,7 +47,7 @@ function Selector() {
           <option value="TMS">TMS</option>
           <option value="PGR">PGR</option>
         </select>
-      </FormControl>
+      </FormControl> */}
     </>
   );
 }
